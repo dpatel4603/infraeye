@@ -1,0 +1,32 @@
+export type Route = {
+  id: number;
+  timestamp: number;
+  type: 'announcement' | 'withdrawal' | 'snapshot';
+  peer_id: string;
+  prefix: string;
+  as_path: number[];
+  source_sequence?: string;
+  previous_path?: number[] | null;
+};
+export type Metadata = {
+  data_label: string;
+  resource: string;
+  resources: string[];
+  start: number;
+  end: number;
+  fetched_at: number;
+  dataset_id: string;
+  source_url: string;
+  collector: string;
+  refresh_seconds: number;
+  cache_age_seconds: number;
+  retrieval_error?: string;
+  event_count: number;
+  initial_route_count: number;
+  messages: unknown[];
+  asns: { asn: number; name: string; role: string }[];
+  prefixes: string[];
+  peers: { id: string; name: string; asn: number; collector: string; ip: string }[];
+};
+export type Snapshot = { timestamp: number; dataset_id: string; routes: Route[]; events: Route[] };
+export type Selection = { kind: 'asn'; asn: number } | { kind: 'prefix'; prefix: string } | { kind: 'event'; event: Route };
